@@ -1,0 +1,20 @@
+//loads variables, if available
+block variables
+
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width")
+    title #{title} | Cycle Toronto
+    //stylesheet href refering to public folder due to public folder setup in index.js folder/files pathing
+    //link(rel="stylesheet", href="/css/styles.css")
+  body
+    header#header
+      div.header-content
+        h2#site-name
+          a(href="/")#logo-link Cycle Toronto
+    main#main
+      block layout-content
+    footer#footer
+      div &copy; Copyright Cycle Toronto, 2022.

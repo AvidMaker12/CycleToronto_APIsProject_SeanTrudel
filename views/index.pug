@@ -1,0 +1,13 @@
+extends layout
+
+block layout-content
+  h1.pageTitle Cycle Toronto
+  p Every Torontonian's cycling companion app.
+  //!!! Display APIs here !!!
+  // Bicycle Parking Racks API
+  div.API#bicycle-parking-racks
+    ul 
+      each b in BikeRacks 
+        li #{b.ADDRESS_FULL} (#{b.WARD_NAME})
+    
+  
