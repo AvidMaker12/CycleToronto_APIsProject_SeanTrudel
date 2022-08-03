@@ -1,0 +1,33 @@
+{
+  "name": "cycletoronto_apisproject_seantrudel",
+  "version": "1.0.0",
+  "description": "\"Cycle Toronto\" activity web app using City of Toronto's bicycle-related APIs. Purpose: Provide outdoor activity ideas for people who feel the need to get out and cycle. Description: The cyclist can use this app to plan their nest trip by being informed on Toronto's upcoming public holidays, where to park their bikes, and suggested city bikeways.",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "browser-sync": "^2.27.10",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "fs": "^0.0.1-security",
+    "https": "^1.0.0",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  },
+  "scripts": {
+    "dev": "nodemon ./index.js",
+    "refresh-ui": "browser-sync start --config bs-config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AvidMaker12/CycleToronto_APIsProject_SeanTrudel.git"
+  },
+  "author": "Sean Trudel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AvidMaker12/CycleToronto_APIsProject_SeanTrudel/issues"
+  },
+  "homepage": "https://github.com/AvidMaker12/CycleToronto_APIsProject_SeanTrudel#readme"
+}
