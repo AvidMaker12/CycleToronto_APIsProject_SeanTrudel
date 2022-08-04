@@ -13,7 +13,7 @@ block layout-content
       each b in BikeRacks 
         li #{b.ADDRESS_FULL}, #{b.WARD_NAME}, (#{b.geometry})
   script.
-      //-- MAP API --
+      //-- MAP API -- (for unknown reasons not found on the map API documentation, this code can only run inline, not in separate .js document)
 
       //-- Map API Display --
       // Map API variables:
@@ -101,44 +101,12 @@ block layout-content
 
           // Holds data for Console.log regarding the bike rack data for debug purposes.
           str += "Latitude: "+matchPatternTest[0]+", Longitude: "+matchPatternTest[1]+", Address: "+bikeRackValue[4]+", Postal Code: "+bikeRackValue[5]+", Notes: "+bikeRackValue[28]+", Capacity: "+bikeRackValue[21]+", Sheltered: "+bikeRackValue[24]+", Ward Name: "+bikeRackValue[14]+"\n";
-        }
-        console.log("Match Results: \n"+ str);
+        } // End of for loop.
         
-        //console.log("Tester");
-        //console.log("Match Results: "+ matchPatternTest);
-      }
+        console.log("Match Results: \n"+ str);
+
+      } // End of else.
       
-      // Below Regex captures following: "coordinates": [-79.4945826626564, 43.689484593934
-      // /(?:("coordinates": ))\D(?:(\D|[0-9]{1,})[0-9]{1,}\D[0-9]{1,}\D\s(\D|[0-9]{1,}\D[0-9]{1,}))/gi
-
-      // Below Regex captures following: -79.4945826626564, 43.689484593934   or   79.4, -43.6
-      // /(?:(\x2D[0-9]{1,}\x2E[0-9]{1,}|[0-9]{1,}\x2E[0-9]{1,}))/gi
-
-      /*if (patternId.test(text)) {
-        console.log("True: Regex Test: "+text);
-      } else {
-        console.log("False: Regex Test: "+text);
-      }
-      */
-
-      //JSON.stringify(BikeRacks_data); // Gets Bicycle Parking Racks API data sent from index.js to this index.pug file for use in the map markers creation & display.
-
-      // Array populate test:
-      //BikeRacksArray = BikeRacks_data;
-      //console.log("BikeRacksArray: "+BikeRacks_data[0]); // Returns [object Object]
-      //console.log("BikeRacksArray: "+BikeRacks_data.ADDRESS_FULL); // Returns undefined
-      //console.log("BikeRacksArray: "+BikeRacks_data.geometry[1]); // Error
-      //console.log("BikeRacksArray: "+BikeRacks_data[0].geometry[1]); // Returns ''
-      //console.log("BikeRacksArray: "+BikeRacks_data[0].geometry[0]); // Returns {
-      //console.log("BikeRacksArray: "+BikeRacks_data[0].geometry); // Returns {"type": "Point", "coordinates": [-79.4945826626564, 43.689484593934]}
-
-      // Loop to create markers using Bicycle Parking Racks API data.
-      // Test loop:
-      /*
-      for (let i=0; i<3; i++) {
-        L.marker([latitude+(i*.01), longitude-(i*.01)], {icon: bikeRackIcon}, {alt: 'Marker'}).addTo(map);
-      };
-      */
-      //console.log("Test 1:" + JSON.stringify(BikeRacks_data));
+      
       
       
