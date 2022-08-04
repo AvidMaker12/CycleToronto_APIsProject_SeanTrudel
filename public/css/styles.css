@@ -203,7 +203,10 @@ a {
 
 /* APIs */
 /* Leaflet map API */
-#map { height: 180px; }
+#map {
+  height: 500px;
+  border: solid 2px red;
+}
 
 /* FOOTER */
 #footer {
