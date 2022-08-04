@@ -1,0 +1,265 @@
+/*CycleAPI_HTTP5211_nJS
+  SeanTrudel
+  */
+/*Teko font, hero font; Abel font, main text*/
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Teko:wght@300&display=swap');
+
+/* GENERAL STYLES */
+html {
+  font-family: "Abel", sans-serif;
+  background-color: white;
+  color: white;
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+  font-size: 1.5rem;
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+}
+
+/* HEADER */
+.headerContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(238, 155, 0);
+}
+/* LOGO */
+a {
+  text-decoration: none;
+  color: white;
+}
+#logoLink {
+  font-family: "Teko", sans-serrif;
+  color: rgb(238, 155, 0);
+  background-color: white;
+  padding: 1rem;
+  border-radius: 2rem;
+}
+/* LINKS */
+.link {
+  background-color: none;
+  border-radius: .25rem;
+  padding: .5rem;
+  transition: all 0.2s ease-out;
+}
+.link:hover {
+  color: rgb(238, 155, 0);
+  background-color: white;
+  font-weight: bold;
+}
+#siteName {
+  margin: 1rem;
+}
+
+/* SEARCH BAR */
+.searchFeature {
+  background-color: rgb(128, 0, 75);
+  margin: none;
+  padding: 0.5 3rem;
+  border-radius: .25rem;
+}
+#searchBar {
+  background-color: rgb(128, 0, 75);
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 15vw;
+  color: white;
+}
+#searchBtn {
+  background-color: rgb(211, 39, 154);
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  margin: none;
+  padding: 0.5rem;
+  top: 50%;
+  left: -100%;
+  vertical-align: middle;
+  cursor: pointer;
+  opacity: 75%;
+}
+#searchBtn:hover {
+  opacity: 100%;
+}
+
+/* MENU */
+#mainNavigation ul {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+}
+#mainNavigation li {
+  padding: 1rem;
+}
+
+/* LANDING PG IMAGE*/
+#heroImg {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  color: white;
+}
+#heroImg img {
+  width: 100vw;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 40%;
+}
+
+/* LANDING TEXT: Site Description */
+.centeredText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+  margin-top: 3rem;
+}
+.centeredText p {
+  color: rgb(238, 155, 0);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.pageTitle {
+  color: rgb(211, 39, 154);
+  font-weight: bold;
+  font-size: 7rem;
+  font-family: "Teko", sans-serrif;
+}
+/* green: rgb(128, 201, 128); */
+
+/* FEATURED PRODUCTS */
+.featured {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.productTile {
+  background-color: white;
+  margin: 5rem 3rem;
+  width: 33%;
+  max-width: 20rem;
+  border-radius: .5rem;
+  transition: all .3s ease-out;
+}
+.productTile:hover {
+  transform: scale(1.05);
+}
+.productTile img {
+  height: 10rem;
+  display: block;
+  margin: auto;
+  margin-top: 1rem;
+}
+.productTileText {
+  text-align: center;
+  padding: 1rem 2rem;
+  color: black;
+}
+/* Featured Products: Star rating icons */
+.starChecked {
+  color: rgb(238, 155, 0);
+}
+/* Prices: Currency font size change */
+.currencyFont:before {
+  content: '$';
+  font-size: 75%;
+  vertical-align: top;
+  position: relative;
+  top: .1rem;
+}
+.currencyFont {
+  font-size: 1.5rem;
+}
+
+/* PAGES */
+.padding {
+  padding: 1rem;
+}
+.page-title {
+  color: rgb(211, 39, 154)
+}
+.noirText {
+  color: black;
+}
+
+/* PRODUCTS */
+.productFlexContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.productFlexItem {
+  margin: none;
+  padding: none;
+  max-width: 50%;
+}
+
+
+/* APIs */
+/* Leaflet map API */
+#map {
+  height: 500px;
+  border: solid 2px red;
+}
+
+/* FOOTER */
+#footer {
+  padding: 5vw;
+  background-color: rgb(128, 0, 75);
+}
+
+
+
+/* ---MEDIA QUERIES--- */
+  
+  /* Tablet portrait breakpoint layout */
+  @media screen and (max-width:768px) {
+    .page-title {
+      font-size: 5rem;
+      color: rgb(211, 39, 154)
+    }
+    .centeredText {
+      top: 35%;
+      transform: translate(-50%,-50%);
+      text-align: center;
+    }
+    .centeredText p {
+      font-size: 1rem;
+      margin: 0;
+    }
+  }
+  
+  /* Mobile landscape breakpoint layout */
+  @media screen and (max-width:480px) {
+    h2 {
+      font-size: 1rem;
+    }
+    #text-intro h3 {
+      font-size: 1.5rem;
+    }
+    /*Contact form*/
+    .contact-form {
+      padding: 0rem;
+      margin: 0rem;
+    }
+  }
+
+  /* Mobile portrait breakpoint layout */
+  @media screen and (max-width:320px) {
+    html {
+      font-size: 1.8rem;
+    }
+    h1 {
+      font-size: 1.2rem;
+    }
+  }
+
+  @supports (display: grid) {   /*older browser support*/
+
+  }

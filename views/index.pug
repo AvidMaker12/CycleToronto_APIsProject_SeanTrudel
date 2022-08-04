@@ -1,13 +1,144 @@
 extends layout
 
 block layout-content
+  script.
+    var BikeRacks_data = !{ JSON.stringify(BikeRacks) };
   h1.pageTitle Cycle Toronto
   p Every Torontonian's cycling companion app.
-  //!!! Display APIs here !!!
+  // Leaflet map API displayed in this <div>
+  div#map
   // Bicycle Parking Racks API
   div.API#bicycle-parking-racks
     ul 
       each b in BikeRacks 
-        li #{b.ADDRESS_FULL} (#{b.WARD_NAME})
-    
-  
+        li #{b.ADDRESS_FULL}, #{b.WARD_NAME}, (#{b.geometry})
+  script.
+      //-- MAP API --
+
+      //-- Map API Display --
+      // Map API variables:
+      var latitudeMap = 43.717; // Toronto latitude:43.717
+      var longitudeMap = -79.462; // Toronto longitude:-79.462
+      // Leaflet map API initialization, currently set to London coordinates.
+      //const map = L.map('map').setView([51.505, -0.09], 13); // London latitude:51.505, longitude:-0.09, zoom-lvl:13 (note: larger zoom-lvl values zooms-in closer on the map)
+      const map = L.map('map').setView([latitudeMap, longitudeMap], 11); // Toronto latitude:43.717, longitude:-79.462, zoom-lvl:11 (note: larger zoom-lvl values zooms-in closer on the map)
+      // OpenStreetMap copyright attribution.
+      const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+      // Map tile URL parameter to be used in const 'tiles'
+      const tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+      // Map tiles to render to map API window.
+      const tiles = L.tileLayer(tileURL,{ attribution }); // The 'attribution' parameter is expecteed in the form of an object.
+      // Add tiles to map.
+      tiles.addTo(map);
+      
+
+      //-- Markers for Map API --
+      // Custom Icon for map Marker.
+      var bikeRackIcon = L.icon({
+        iconUrl: '/images/icon-bicycle-200.png',
+        iconSize: [50, 50],
+        iconAnchor: [25, 25]
+      });
+      // 'Marker' user-interface layer to show icons on the map. Documentation: https://leafletjs.com/reference.html#marker
+      
+        //marker.setLatLng([latitude,longitude]); // Resets the latitude & longitude of a marker.
+      
+      // Empty arrays for data used for map markers, of which will be populated with a loop.
+      var latitudeMarker = [];
+      var longitudeMarker = [];
+      var addressMarker = [];
+      var postalCodeMarker = [];
+      var notesMarker = [];
+      var capacityMarker = [];
+      var shelteredMarker = [];
+      var wardNameMarker = [];
+
+      // Validate whether Bicycle Parking Racks API data has stored values that matches Regex.
+      var bikeRackCoordinates = BikeRacks_data[0].geometry;
+      //console.log("bikeRackCoordinates: " + bikeRackCoordinates);
+      var matchPatternTest = bikeRackCoordinates.match(/(?:(\x2D[0-9]{1,}\x2E[0-9]{1,}|[0-9]{1,}\x2E[0-9]{1,}))/gi);
+      // Console.log results of the marker coordinates loop.
+      var str = "";
+      
+      
+      if (!matchPatternTest) {
+        // Fail scenario: no matching data from the Bicycle Parking Racks API array.
+        console.log("No Results. There were no matching data within the Bicycle Parking Racks API.");
+      } else {
+        // Success scenario: found matching data from the Bicycle Parking Racks API array.
+        // Loop to extract info from Bicycle Parking Racks API to be used for map markers.
+        for (var i = 0; i < BikeRacks_data.length; i++) { // Number of loops equals number of objects within Bicycle Parking Racks API array.
+          // Extracts data from Bicycle Parking Racks API to be matched with Regex to retrieve coordinates data for map markers.
+          var bikeRackCoordinates = JSON.stringify(BikeRacks_data[i].geometry);
+          // Matches Bicycle Parking Racks API coordinates data with Regex, then stores the coordinates as an array 'matchPatternTest'. There are 2 items in this array: latitude & longitude.
+          var matchPatternTest = bikeRackCoordinates.match(/(?:(\x2D[0-9]{1,}\x2E[0-9]{1,}|[0-9]{1,}\x2E[0-9]{1,}))/gi);
+          
+          // Populate arrays for Latitude and Longitude.
+          latitudeMarker.push(matchPatternTest[1]); // Note: Bicycle Parking Racks API latitude coordinates are stored as the second number, array index 1.
+          longitudeMarker.push(matchPatternTest[0]); // Note: Bicycle Parking Racks API longitude coordinates are stored as the first number, array index 0.
+
+          // Extracts data from Bicycle Parking Racks API for map marker popup info display.
+          var bikeRackInfo = BikeRacks_data[i];
+          
+          //console.log("bikeRackInfo7: "+Object.values(bikeRackInfo)); // Returns array
+          
+          // Stores Bicycle Parking Racks API data objects as array.
+          var bikeRackValue = Object.values(bikeRackInfo);
+          //console.log("bikeRackInfo8: "+bikeRackValue[4]); // Returns array item
+          
+          // Populate arrays for map marker popup info display.
+          addressMarker.push(bikeRackValue[4]);
+          postalCodeMarker.push(bikeRackValue[5]);
+          notesMarker.push(bikeRackValue[28]);
+          capacityMarker.push(bikeRackValue[21]);
+          shelteredMarker.push(bikeRackValue[24]);
+          wardNameMarker.push(bikeRackValue[14]);
+
+          // Create map markers.
+          marker = L.marker([latitudeMarker[i], longitudeMarker[i]], {icon: bikeRackIcon, alt: 'Bike Rack Marker', title: bikeRackValue[4]+", "+bikeRackValue[5], riseOnHover: true}).addTo(map);
+          // Creates popup messages onclick for map markers. Popup text use html.
+          marker.bindPopup("<b>Address: "+bikeRackValue[4]+"</b><br>Postal Code: "+bikeRackValue[5]+"<br>Notes: "+bikeRackValue[28]+"<br>Capacity: "+bikeRackValue[21]+"<br>Sheltered: "+bikeRackValue[24]+"<br>Ward Name: "+bikeRackValue[14]).openPopup();
+
+          // Holds data for Console.log regarding the bike rack data for debug purposes.
+          str += "Latitude: "+matchPatternTest[0]+", Longitude: "+matchPatternTest[1]+", Address: "+bikeRackValue[4]+", Postal Code: "+bikeRackValue[5]+", Notes: "+bikeRackValue[28]+", Capacity: "+bikeRackValue[21]+", Sheltered: "+bikeRackValue[24]+", Ward Name: "+bikeRackValue[14]+"\n";
+        }
+        console.log("Match Results: \n"+ str);
+        
+        //console.log("Tester");
+        //console.log("Match Results: "+ matchPatternTest);
+      }
+      
+      // Below Regex captures following: "coordinates": [-79.4945826626564, 43.689484593934
+      // /(?:("coordinates": ))\D(?:(\D|[0-9]{1,})[0-9]{1,}\D[0-9]{1,}\D\s(\D|[0-9]{1,}\D[0-9]{1,}))/gi
+
+      // Below Regex captures following: -79.4945826626564, 43.689484593934   or   79.4, -43.6
+      // /(?:(\x2D[0-9]{1,}\x2E[0-9]{1,}|[0-9]{1,}\x2E[0-9]{1,}))/gi
+
+      /*if (patternId.test(text)) {
+        console.log("True: Regex Test: "+text);
+      } else {
+        console.log("False: Regex Test: "+text);
+      }
+      */
+
+      //JSON.stringify(BikeRacks_data); // Gets Bicycle Parking Racks API data sent from index.js to this index.pug file for use in the map markers creation & display.
+
+      // Array populate test:
+      //BikeRacksArray = BikeRacks_data;
+      //console.log("BikeRacksArray: "+BikeRacks_data[0]); // Returns [object Object]
+      //console.log("BikeRacksArray: "+BikeRacks_data.ADDRESS_FULL); // Returns undefined
+      //console.log("BikeRacksArray: "+BikeRacks_data.geometry[1]); // Error
+      //console.log("BikeRacksArray: "+BikeRacks_data[0].geometry[1]); // Returns ''
+      //console.log("BikeRacksArray: "+BikeRacks_data[0].geometry[0]); // Returns {
+      //console.log("BikeRacksArray: "+BikeRacks_data[0].geometry); // Returns {"type": "Point", "coordinates": [-79.4945826626564, 43.689484593934]}
+
+      // Loop to create markers using Bicycle Parking Racks API data.
+      // Test loop:
+      /*
+      for (let i=0; i<3; i++) {
+        L.marker([latitude+(i*.01), longitude-(i*.01)], {icon: bikeRackIcon}, {alt: 'Marker'}).addTo(map);
+      };
+      */
+      //console.log("Test 1:" + JSON.stringify(BikeRacks_data));
+      
+      
