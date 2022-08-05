@@ -7,7 +7,7 @@
 /* GENERAL STYLES */
 html {
   font-family: "Abel", sans-serif;
-  background-color: white;
+  background-color: rgb(0, 54, 45);
   color: white;
   margin: 0;
   padding: 0;
@@ -20,24 +20,27 @@ body {
 }
 
 /* HEADER */
-.headerContent {
+#header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(238, 155, 0);
+  background-color: green;
+  padding: 3vh 5%;
+  border-bottom: solid white 1rem;
 }
 /* LOGO */
 a {
   text-decoration: none;
   color: white;
 }
-#logoLink {
+#logo-link {
   font-family: "Teko", sans-serrif;
-  color: rgb(238, 155, 0);
-  background-color: white;
-  padding: 1rem;
-  border-radius: 2rem;
+  color: white;
+  background-color: green;
+  padding: .25rem .5rem;
+  border-radius: .5rem;
+  outline: white solid .25rem;
 }
 /* LINKS */
 .link {
@@ -51,40 +54,10 @@ a {
   background-color: white;
   font-weight: bold;
 }
-#siteName {
+#site-name {
   margin: 1rem;
 }
 
-/* SEARCH BAR */
-.searchFeature {
-  background-color: rgb(128, 0, 75);
-  margin: none;
-  padding: 0.5 3rem;
-  border-radius: .25rem;
-}
-#searchBar {
-  background-color: rgb(128, 0, 75);
-  border: none;
-  border-radius: 0.25rem;
-  padding: 0.5rem 15vw;
-  color: white;
-}
-#searchBtn {
-  background-color: rgb(211, 39, 154);
-  border: none;
-  border-radius: 0.25rem;
-  color: white;
-  margin: none;
-  padding: 0.5rem;
-  top: 50%;
-  left: -100%;
-  vertical-align: middle;
-  cursor: pointer;
-  opacity: 75%;
-}
-#searchBtn:hover {
-  opacity: 100%;
-}
 
 /* MENU */
 #mainNavigation ul {
@@ -94,6 +67,11 @@ a {
 }
 #mainNavigation li {
   padding: 1rem;
+}
+
+/* MAIN */
+#main {
+  padding: 5%;
 }
 
 /* LANDING PG IMAGE*/
@@ -125,79 +103,40 @@ a {
   font-weight: bold;
   font-size: 1.5rem;
 }
-.pageTitle {
-  color: rgb(211, 39, 154);
+.page-title {
+  color: lightgrey;
   font-weight: bold;
   font-size: 7rem;
   font-family: "Teko", sans-serrif;
+  margin: 0;
 }
-/* green: rgb(128, 201, 128); */
 
-/* FEATURED PRODUCTS */
-.featured {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-.productTile {
-  background-color: white;
-  margin: 5rem 3rem;
-  width: 33%;
-  max-width: 20rem;
-  border-radius: .5rem;
-  transition: all .3s ease-out;
-}
-.productTile:hover {
-  transform: scale(1.05);
-}
-.productTile img {
-  height: 10rem;
-  display: block;
-  margin: auto;
-  margin-top: 1rem;
-}
-.productTileText {
-  text-align: center;
-  padding: 1rem 2rem;
-  color: black;
-}
-/* Featured Products: Star rating icons */
-.starChecked {
-  color: rgb(238, 155, 0);
-}
-/* Prices: Currency font size change */
-.currencyFont:before {
-  content: '$';
-  font-size: 75%;
-  vertical-align: top;
-  position: relative;
-  top: .1rem;
-}
-.currencyFont {
-  font-size: 1.5rem;
-}
 
 /* PAGES */
 .padding {
   padding: 1rem;
 }
-.page-title {
-  color: rgb(211, 39, 154)
-}
 .noirText {
   color: black;
 }
-
-/* PRODUCTS */
-.productFlexContainer {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
+.section-title {
+  font-weight: bold;
+  font-size: 2rem;
+  font-family: "Teko", sans-serrif;
+  margin: 4rem 0 0 0;
 }
-.productFlexItem {
-  margin: none;
-  padding: none;
-  max-width: 50%;
+
+#bicycle-parking-racks-info {
+  margin: 1rem 0;
+}
+
+.list-panel {
+  border-bottom: solid .1rem;
+  padding: 2rem;
+}
+
+#bike-rack-table {
+  padding: 0;
 }
 
 
@@ -205,13 +144,16 @@ a {
 /* Leaflet map API */
 #map {
   height: 500px;
-  border: solid 2px red;
+  margin: auto 10%;
+  border: solid 10px darkgreen;
 }
+
 
 /* FOOTER */
 #footer {
   padding: 5vw;
-  background-color: rgb(128, 0, 75);
+  background-color: green;
+  border-top: solid white .25rem;
 }
 
 
